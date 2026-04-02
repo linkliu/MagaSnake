@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dkyvepuojatrw"
-path="res://.godot/imported/watermelon.png-25a8454d1edc0c28b996a8f75a91bb5d.ctex"
+uid="uid://dthe8ql7soq66"
+path="res://.godot/imported/oil.png-89d54907bcc3a9008b7097541072f0c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/watermelon.png"
-dest_files=["res://.godot/imported/watermelon.png-25a8454d1edc0c28b996a8f75a91bb5d.ctex"]
+source_file="res://assets/textures/oil.png"
+dest_files=["res://.godot/imported/oil.png-89d54907bcc3a9008b7097541072f0c9.ctex"]
 
 [params]
 

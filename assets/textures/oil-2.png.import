@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://hlr72rata0f0"
-path="res://.godot/imported/lemon.png-502831ff7f2c93ea3e5987c1f522249c.ctex"
+uid="uid://c3qaytctrp8e4"
+path="res://.godot/imported/oil-2.png-4785355d01b681cdcedf623313a747c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/lemon.png"
-dest_files=["res://.godot/imported/lemon.png-502831ff7f2c93ea3e5987c1f522249c.ctex"]
+source_file="res://assets/textures/oil-2.png"
+dest_files=["res://.godot/imported/oil-2.png-4785355d01b681cdcedf623313a747c1.ctex"]
 
 [params]
 
