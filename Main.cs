@@ -9,15 +9,15 @@ public partial class Main : Node2D
     private const int InitialSnakeLength = 4;
     private const float MoveInterval = 0.18f;
 
-    private readonly List<Vector2I> _snake = new();
+    private readonly List<Vector2I> _snake = new List<Vector2I>();
     private Vector2I _direction = Vector2I.Right;
     private Vector2I _pendingDirection = Vector2I.Right;
     private int _growPending = 0;
-    private Vector2I _fruit = new(15, 10);
-    private readonly HashSet<Vector2I> _obstacles = new();
+    private Vector2I _fruit = new Vector2I(15, 10);
+    private readonly HashSet<Vector2I> _obstacles = new HashSet<Vector2I>();
     private bool _gameOver = false;
     private float _moveAccumulator = 0f;
-    private readonly RandomNumberGenerator _rng = new();
+    private readonly RandomNumberGenerator _rng = new RandomNumberGenerator();
 
     public override void _Ready()
     {
@@ -125,9 +125,9 @@ public partial class Main : Node2D
 
     private bool IsSupported()
     {
-        foreach (Vector2I segment in _snake)
+        for (int i = 0; i < _snake.Count; i++)
         {
-            Vector2I down = segment + Vector2I.Down;
+            Vector2I down = _snake[i] + Vector2I.Down;
             if (IsOutside(down) || IsObstacle(down) || SnakeContains(down))
             {
                 return true;
@@ -139,7 +139,7 @@ public partial class Main : Node2D
 
     private void TryEatFruit()
     {
-        if (_snake[0] == _fruit)
+        if (_snake.Count > 0 && _snake[0] == _fruit)
         {
             _growPending += 1;
             SpawnFruit();
@@ -148,12 +148,13 @@ public partial class Main : Node2D
 
     private void SpawnFruit()
     {
-        List<Vector2I> freeCells = new();
+        List<Vector2I> freeCells = new List<Vector2I>();
+
         for (int y = 0; y < BoardHeight; y++)
         {
             for (int x = 0; x < BoardWidth; x++)
             {
-                Vector2I cell = new(x, y);
+                Vector2I cell = new Vector2I(x, y);
                 if (!IsObstacle(cell) && !SnakeContains(cell))
                 {
                     freeCells.Add(cell);
@@ -166,7 +167,7 @@ public partial class Main : Node2D
             return;
         }
 
-        int index = _rng.RandiRange(0, freeCells.Count - 1);
+        int index = (int)_rng.RandiRange(0, freeCells.Count - 1);
         _fruit = freeCells[index];
     }
 
@@ -230,7 +231,7 @@ public partial class Main : Node2D
 
     public override void _Draw()
     {
-        Rect2 boardRect = new(Vector2.Zero, new Vector2(BoardWidth * GridSize, BoardHeight * GridSize));
+        Rect2 boardRect = new Rect2(Vector2.Zero, new Vector2(BoardWidth * GridSize, BoardHeight * GridSize));
         DrawRect(boardRect, new Color("1f1f30"), true);
         DrawRect(boardRect, new Color("6fa6ff"), false, 3.0f);
 
@@ -249,16 +250,13 @@ public partial class Main : Node2D
 
         if (_gameOver)
         {
-            DrawString(ThemeDB.FallbackFont, new Vector2(140, 220), "Game Over! Enter 重开", HorizontalAlignment.Left, -1, ThemeDB.FallbackFontSize, Colors.White);
+            DrawRect(new Rect2(new Vector2(140, 200), new Vector2(240, 50)), new Color(0, 0, 0, 0.45f), true);
         }
-
-        DrawString(ThemeDB.FallbackFont, new Vector2(10, 24), "方向键移动 | 重力持续生效", HorizontalAlignment.Left, -1, ThemeDB.FallbackFontSize, new Color("cce4ff"));
     }
 
     private static Rect2 CellRect(Vector2I cell)
     {
-        Vector2 pos = new(cell.X, cell.Y);
-        pos *= GridSize;
+        Vector2 pos = new Vector2(cell.X, cell.Y) * GridSize;
         return new Rect2(pos + Vector2.One, Vector2.One * (GridSize - 2));
     }
 
