@@ -230,7 +230,7 @@ public partial class Main : Node2D
 
     public override void _Draw()
     {
-        Rect2 boardRect = new(Vector2.Zero, new Vector2(BoardWidth, BoardHeight) * GridSize);
+        Rect2 boardRect = new(Vector2.Zero, new Vector2(BoardWidth * GridSize, BoardHeight * GridSize));
         DrawRect(boardRect, new Color("1f1f30"), true);
         DrawRect(boardRect, new Color("6fa6ff"), false, 3.0f);
 
@@ -249,10 +249,10 @@ public partial class Main : Node2D
 
         if (_gameOver)
         {
-            DrawString(GetThemeDefaultFont(), new Vector2(140, 220), "Game Over! Enter 重开", HorizontalAlignment.Left, -1, 28, Colors.White);
+            DrawString(ThemeDB.FallbackFont, new Vector2(140, 220), "Game Over! Enter 重开", HorizontalAlignment.Left, -1, ThemeDB.FallbackFontSize, Colors.White);
         }
 
-        DrawString(GetThemeDefaultFont(), new Vector2(10, 24), "方向键移动 | 重力持续生效", HorizontalAlignment.Left, -1, 18, new Color("cce4ff"));
+        DrawString(ThemeDB.FallbackFont, new Vector2(10, 24), "方向键移动 | 重力持续生效", HorizontalAlignment.Left, -1, ThemeDB.FallbackFontSize, new Color("cce4ff"));
     }
 
     private static Rect2 CellRect(Vector2I cell)
